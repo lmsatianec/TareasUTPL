@@ -31,7 +31,7 @@ Las herramientas utilizadas para el desarrollo del proyecto fueron:
 
 # 3. Estructura del proyecto
 
-
+```text
 gs_web/
 │
 ├── css/
@@ -47,7 +47,7 @@ gs_web/
 ├── logout.php
 ├── database.sql
 └── README.md
-
+```
 
 ---
 
@@ -92,29 +92,29 @@ Descargar XAMPP desde el sitio oficial de Apache Friends.
 
 Durante la instalación mantener seleccionados los siguientes componentes:
 
-
+```text
 Apache
 MySQL
 PHP
 phpMyAdmin
-
+```
 
 ## Paso 3: Abrir XAMPP Control Panel
 
 Una vez instalado abrir:
 
-
+```text
 XAMPP Control Panel
-
+```
 
 ## Paso 4: Iniciar servicios
 
 Iniciar:
 
-
+```text
 Apache
 MySQL
-
+```
 
 Los servicios deben quedar activos.
 
@@ -124,9 +124,9 @@ Los servicios deben quedar activos.
 
 Con Apache y MySQL activos abrir el navegador y acceder a:
 
-
+```text
 http://localhost/phpmyadmin
-
+```
 
 Desde phpMyAdmin se administrará la base de datos del proyecto.
 
@@ -136,22 +136,22 @@ Desde phpMyAdmin se administrará la base de datos del proyecto.
 
 Para el proyecto se utiliza el usuario local predeterminado de XAMPP:
 
-
+```text
 Servidor: localhost
 Usuario: root
 Contraseña: vacía
 Base de datos: gs_web_db
-
+```
 
 Estos valores están configurados en el archivo:
 
-
+```text
 conexion.php
-
+```
 
 Ejemplo:
 
-
+```php
 <?php
 
 $servidor = "localhost";
@@ -166,7 +166,7 @@ if (!$conn) {
 }
 
 ?>
-
+```
 
 ---
 
@@ -176,31 +176,31 @@ if (!$conn) {
 
 Ingresar a:
 
-
+```text
 http://localhost/phpmyadmin
-
+```
 
 ## Paso 2: Abrir SQL
 
 Seleccionar la opción:
 
-
+```text
 SQL
-
+```
 
 ## Paso 3: Ejecutar el script de creación
 
-
+```sql
 CREATE DATABASE gs_web_db
 DEFAULT CHARACTER SET utf8mb4
 DEFAULT COLLATE utf8mb4_general_ci;
-
+```
 
 ## Paso 4: Seleccionar la base de datos
 
-
+```sql
 USE gs_web_db;
-
+```
 
 ---
 
@@ -208,7 +208,7 @@ USE gs_web_db;
 
 Ejecutar el siguiente script:
 
-
+```sql
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cedula VARCHAR(20) NOT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE usuarios (
     password VARCHAR(255) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
+```
 
 ---
 
@@ -240,7 +240,7 @@ El campo `password` usa `VARCHAR(255)` porque las contraseñas se almacenan medi
 
 # 12. Script completo de base de datos
 
-
+```sql
 CREATE DATABASE gs_web_db
 DEFAULT CHARACTER SET utf8mb4
 DEFAULT COLLATE utf8mb4_general_ci;
@@ -255,13 +255,13 @@ CREATE TABLE usuarios (
     password VARCHAR(255) NOT NULL,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
+```
 
 Este contenido también se encuentra dentro del archivo:
 
-
+```text
 database.sql
-
+```
 
 ---
 
@@ -275,38 +275,38 @@ Descargar o clonar el repositorio desde GitHub.
 
 Copiar la carpeta:
 
-
+```text
 gs_web
-
+```
 
 Dentro de:
 
-
+```text
 C:\xampp\htdocs\
-
+```
 
 La ruta final debe quedar así:
 
-
+```text
 C:\xampp\htdocs\gs_web\
-
+```
 
 ## Paso 3: Verificar servicios
 
 En XAMPP verificar que estén activos:
 
-
+```text
 Apache
 MySQL
-
+```
 
 ## Paso 4: Abrir el sistema
 
 Desde el navegador acceder a:
 
-
+```text
 http://localhost/gs_web
-
+```
 
 ---
 
@@ -329,18 +329,18 @@ El sistema utiliza sesiones PHP para controlar el acceso a páginas privadas.
 
 Cuando el usuario inicia sesión correctamente se crean variables de sesión:
 
-
+```php
 $_SESSION['usuario'] = $fila['nombre'];
 $_SESSION['correo'] = $fila['correo'];
-
+```
 
 Las páginas privadas validan la existencia de sesión mediante:
 
-
+```php
 if(!isset($_SESSION['usuario'])){
     header("Location: login.php");
 }
-
+```
 
 Esto evita accesos no autorizados.
 
@@ -352,9 +352,9 @@ Esto evita accesos no autorizados.
 
 Las contraseñas se almacenan utilizando:
 
-
+```php
 password_hash()
-
+```
 
 Esto evita guardar contraseñas en texto plano.
 
@@ -362,9 +362,9 @@ Esto evita guardar contraseñas en texto plano.
 
 Durante el login se utiliza:
 
-
+```php
 password_verify()
-
+```
 
 Para validar la contraseña ingresada contra el hash almacenado.
 
@@ -380,9 +380,9 @@ El sistema verifica que el correo no exista antes de registrar usuarios.
 
 El cierre de sesión se realiza mediante:
 
-
+```php
 session_destroy();
-
+```
 
 ---
 
